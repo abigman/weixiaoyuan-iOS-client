@@ -14,8 +14,7 @@ This is a very early version of iOS app for Shenzhen University.
 
 Thanks
 ------
-A big thanks to [Applidium](http://applidium.com/en/news/cracking_siri/) and also [plamoni](https://github.com/plamoni/SiriProxy/) for his SiriProxy which inspired me
-Thanks to everyone that contributed code or ideas.
+A big thanks to [深大微校园](http://http://weibo.com/vschool/)  for his work.
 
 Licensing
 ---------
