@@ -23,7 +23,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"深大微校园";
+        self.title = @"深大加油";
     }
     return self;
 }
@@ -157,6 +157,17 @@
             self.szuCALLoginViewController = [[SZUCALLoginViewController alloc] initWithNibName:@"SZUCALLoginViewController" bundle:nil];
         }
         [self.navigationController pushViewController:self.szuCALLoginViewController animated:YES];
+    }
+    if(indexPath.row>1 && indexPath.row<5){
+        NSString *msg = [[NSString alloc] 
+                         initWithString:@"该功能的开发诚邀您的参与！"];
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:@"Github" 
+                              message:msg 
+                              delegate:nil 
+                              cancelButtonTitle: @"好"
+                              otherButtonTitles:nil];
+        [alert show];
     }
     if(indexPath.row==5){
         NSString *msg = [[NSString alloc] 

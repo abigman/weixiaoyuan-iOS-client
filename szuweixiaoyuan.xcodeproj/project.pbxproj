@@ -41,6 +41,7 @@
 		9FEA9A59151095D70022375C /* SZUCALLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FEA9A57151095D70022375C /* SZUCALLoginViewController.m */; };
 		9FEA9A5A151095D70022375C /* SZUCALLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FEA9A58151095D70022375C /* SZUCALLoginViewController.xib */; };
 		9FEA9A5E1510989D0022375C /* SZUCALTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FEA9A5D1510989D0022375C /* SZUCALTableViewController.m */; };
+		9FEA9A681510B6570022375C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9FEA9A671510B6570022375C /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +104,7 @@
 		9FEA9A58151095D70022375C /* SZUCALLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SZUCALLoginViewController.xib; sourceTree = "<group>"; };
 		9FEA9A5C1510989D0022375C /* SZUCALTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZUCALTableViewController.h; sourceTree = "<group>"; };
 		9FEA9A5D1510989D0022375C /* SZUCALTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZUCALTableViewController.m; sourceTree = "<group>"; };
+		9FEA9A671510B6570022375C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 		9F25BD1A1510354300F11603 = {
 			isa = PBXGroup;
 			children = (
+				9FEA9A671510B6570022375C /* README.md */,
 				9F25BD61151039B400F11603 /* icon@2x.png */,
 				9F25BD5F151039AF00F11603 /* icon.png */,
 				9F25BD5D1510399700F11603 /* Default@2x.png */,
@@ -291,6 +294,7 @@
 				9F25BD62151039B400F11603 /* icon@2x.png in Resources */,
 				9FA091DD1510627300C6F6AE /* WebViewController.xib in Resources */,
 				9FEA9A5A151095D70022375C /* SZUCALLoginViewController.xib in Resources */,
+				9FEA9A681510B6570022375C /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
