@@ -17,8 +17,6 @@
 		9F25BD401510354300F11603 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F25BD3F1510354300F11603 /* DetailViewController.m */; };
 		9F25BD431510354400F11603 /* MasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F25BD411510354400F11603 /* MasterViewController.xib */; };
 		9F25BD461510354400F11603 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F25BD441510354400F11603 /* DetailViewController.xib */; };
-		9F25BD5C1510399400F11603 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F25BD5B1510399400F11603 /* Default.png */; };
-		9F25BD5E1510399700F11603 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F25BD5D1510399700F11603 /* Default@2x.png */; };
 		9F25BD60151039AF00F11603 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F25BD5F151039AF00F11603 /* icon.png */; };
 		9F25BD62151039B400F11603 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F25BD61151039B400F11603 /* icon@2x.png */; };
 		9F25BD71151045CE00F11603 /* GongwentongFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F25BD70151045CE00F11603 /* GongwentongFetcher.m */; };
@@ -61,8 +59,6 @@
 		9F25BD3F1510354300F11603 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		9F25BD421510354400F11603 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MasterViewController.xib; sourceTree = "<group>"; };
 		9F25BD451510354400F11603 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetailViewController.xib; sourceTree = "<group>"; };
-		9F25BD5B1510399400F11603 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		9F25BD5D1510399700F11603 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		9F25BD5F151039AF00F11603 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		9F25BD61151039B400F11603 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		9F25BD6F151045CE00F11603 /* GongwentongFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GongwentongFetcher.h; sourceTree = "<group>"; };
@@ -127,8 +123,6 @@
 				9FEA9A671510B6570022375C /* README.md */,
 				9F25BD61151039B400F11603 /* icon@2x.png */,
 				9F25BD5F151039AF00F11603 /* icon.png */,
-				9F25BD5D1510399700F11603 /* Default@2x.png */,
-				9F25BD5B1510399400F11603 /* Default.png */,
 				9F25BD2F1510354300F11603 /* szuweixiaoyuan */,
 				9F25BD281510354300F11603 /* Frameworks */,
 				9F25BD261510354300F11603 /* Products */,
@@ -288,8 +282,6 @@
 				9F25BD341510354300F11603 /* InfoPlist.strings in Resources */,
 				9F25BD431510354400F11603 /* MasterViewController.xib in Resources */,
 				9F25BD461510354400F11603 /* DetailViewController.xib in Resources */,
-				9F25BD5C1510399400F11603 /* Default.png in Resources */,
-				9F25BD5E1510399700F11603 /* Default@2x.png in Resources */,
 				9F25BD60151039AF00F11603 /* icon.png in Resources */,
 				9F25BD62151039B400F11603 /* icon@2x.png in Resources */,
 				9FA091DD1510627300C6F6AE /* WebViewController.xib in Resources */,
