@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class DetailViewController;
+@class WebViewController;
 
 @interface GWTListViewController : UITableViewController
 
-@property (strong, nonatomic) DetailViewController *detailViewController;
+@property (strong, nonatomic) WebViewController *webViewController;
 @property(strong,nonatomic)NSString *MainItems;
 @property(strong,nonatomic)NSArray *MasterTVCListtems;
 @end

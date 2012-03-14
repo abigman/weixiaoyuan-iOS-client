@@ -40,7 +40,7 @@
  
     self.MasterTVCListtems = [[NSArray alloc] initWithObjects:
                                 @"深圳大学校园公文通", @"我的课程表", @"荔园晨风兼职",
-                              @"外卖菜单",@"反馈意见",@"Git项目期待您的加入",nil];
+                              @"外卖菜单",@"反馈意见",@"Git项目期待您的加入",nil]; 
 
 }
 
@@ -149,6 +149,17 @@
             self.gwtListViewController = [[GWTListViewController alloc] initWithNibName:@"MasterViewController" bundle:nil];
         }
         [self.navigationController pushViewController:self.gwtListViewController animated:YES];
+    }
+    if(indexPath.row==5){
+        NSString *msg = [[NSString alloc] 
+                         initWithString:@"本项目在Github上的地址是\r\nhttps://github.com/stigliew/weixiaoyuan-iOS-client\r\n期待您的参与哟！\r\n有想法，不能等！\r\n详询短号68469"];
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:@"Github" 
+                              message:msg 
+                              delegate:nil 
+                              cancelButtonTitle: @"好"
+                              otherButtonTitles:nil];
+        [alert show];
     }
     
 }

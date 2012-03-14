@@ -30,7 +30,7 @@
 }
 + (NSDictionary *)executeFetch:(NSString *)query
 {
-    query = [[NSString alloc] initWithFormat:@"%@&cfuuid=%@", query,[FileHelper stringWithUUID]];
+    //query = [[NSString alloc] initWithFormat:@"%@&cfuuid=%@", query,[FileHelper stringWithUUID]];
     //NSLog(@"HTTP REQUEST %@",query);
     query = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
@@ -51,5 +51,13 @@
     }
     
     return ret;
+}
++ (NSString *)getGWTContent:(NSString *)nid
+{
+    NSString *tempURL=[[NSString alloc] initWithFormat:@"%@%@",@"http://vlinju.sinaapp.com/html5/news_content?nid=",nid];
+    NSString *request = [NSString stringWithContentsOfURL:[NSURL URLWithString:tempURL] encoding:NSUTF8StringEncoding error:nil];
+    request=[request stringByReplacingOccurrencesOfString:@"<div class=\"top\">" withString:@"<div class=\"top\"><!--"];
+    request=[request stringByReplacingOccurrencesOfString:@"weixiaoyuan.png\"/></a>" withString:@"-->"];
+    return request;
 }
 @end

@@ -21,7 +21,6 @@
 		9F25BD5E1510399700F11603 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F25BD5D1510399700F11603 /* Default@2x.png */; };
 		9F25BD60151039AF00F11603 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F25BD5F151039AF00F11603 /* icon.png */; };
 		9F25BD62151039B400F11603 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F25BD61151039B400F11603 /* icon@2x.png */; };
-		9F25BD6A1510412700F11603 /* WebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F25BD691510412700F11603 /* WebView.xib */; };
 		9F25BD71151045CE00F11603 /* GongwentongFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F25BD70151045CE00F11603 /* GongwentongFetcher.m */; };
 		9F25BD741510464B00F11603 /* FileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F25BD731510464B00F11603 /* FileHelper.m */; };
 		9F25BD8E151046C800F11603 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F25BD76151046C600F11603 /* NSObject+SBJson.m */; };
@@ -37,6 +36,8 @@
 		9F25BD98151046C800F11603 /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F25BD8B151046C800F11603 /* SBJsonUTF8Stream.m */; };
 		9F25BD99151046C800F11603 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F25BD8D151046C800F11603 /* SBJsonWriter.m */; };
 		9F25BD9D151048CD00F11603 /* GWTListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F25BD9C151048CD00F11603 /* GWTListViewController.m */; };
+		9FA091DC1510627300C6F6AE /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA091DA1510627300C6F6AE /* WebViewController.m */; };
+		9FA091DD1510627300C6F6AE /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FA091DB1510627300C6F6AE /* WebViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,7 +61,6 @@
 		9F25BD5D1510399700F11603 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		9F25BD5F151039AF00F11603 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		9F25BD61151039B400F11603 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
-		9F25BD691510412700F11603 /* WebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebView.xib; sourceTree = "<group>"; };
 		9F25BD6F151045CE00F11603 /* GongwentongFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GongwentongFetcher.h; sourceTree = "<group>"; };
 		9F25BD70151045CE00F11603 /* GongwentongFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GongwentongFetcher.m; sourceTree = "<group>"; };
 		9F25BD721510464B00F11603 /* FileHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileHelper.h; sourceTree = "<group>"; };
@@ -92,6 +92,9 @@
 		9F25BD8D151046C800F11603 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBJsonWriter.m; path = "../../果子电话本/果子电话本/SBJsonWriter.m"; sourceTree = "<group>"; };
 		9F25BD9B151048CD00F11603 /* GWTListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWTListViewController.h; sourceTree = "<group>"; };
 		9F25BD9C151048CD00F11603 /* GWTListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWTListViewController.m; sourceTree = "<group>"; };
+		9FA091D91510627300C6F6AE /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		9FA091DA1510627300C6F6AE /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		9FA091DB1510627300C6F6AE /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +145,7 @@
 		9F25BD2F1510354300F11603 /* szuweixiaoyuan */ = {
 			isa = PBXGroup;
 			children = (
+				9FA091D21510608A00C6F6AE /* Helpers */,
 				9F25BD9A151046CE00F11603 /* SBJson */,
 				9F25BD381510354300F11603 /* AppDelegate.h */,
 				9F25BD391510354300F11603 /* AppDelegate.m */,
@@ -149,16 +153,14 @@
 				9F25BD3C1510354300F11603 /* MasterViewController.m */,
 				9F25BD9B151048CD00F11603 /* GWTListViewController.h */,
 				9F25BD9C151048CD00F11603 /* GWTListViewController.m */,
+				9F25BD411510354400F11603 /* MasterViewController.xib */,
 				9F25BD3E1510354300F11603 /* DetailViewController.h */,
 				9F25BD3F1510354300F11603 /* DetailViewController.m */,
-				9F25BD411510354400F11603 /* MasterViewController.xib */,
-				9F25BD691510412700F11603 /* WebView.xib */,
 				9F25BD441510354400F11603 /* DetailViewController.xib */,
+				9FA091D91510627300C6F6AE /* WebViewController.h */,
+				9FA091DA1510627300C6F6AE /* WebViewController.m */,
+				9FA091DB1510627300C6F6AE /* WebViewController.xib */,
 				9F25BD301510354300F11603 /* Supporting Files */,
-				9F25BD6F151045CE00F11603 /* GongwentongFetcher.h */,
-				9F25BD70151045CE00F11603 /* GongwentongFetcher.m */,
-				9F25BD721510464B00F11603 /* FileHelper.h */,
-				9F25BD731510464B00F11603 /* FileHelper.m */,
 			);
 			path = szuweixiaoyuan;
 			sourceTree = "<group>";
@@ -204,6 +206,17 @@
 				9F25BD8D151046C800F11603 /* SBJsonWriter.m */,
 			);
 			name = SBJson;
+			sourceTree = "<group>";
+		};
+		9FA091D21510608A00C6F6AE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9F25BD6F151045CE00F11603 /* GongwentongFetcher.h */,
+				9F25BD70151045CE00F11603 /* GongwentongFetcher.m */,
+				9F25BD721510464B00F11603 /* FileHelper.h */,
+				9F25BD731510464B00F11603 /* FileHelper.m */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,7 +276,7 @@
 				9F25BD5E1510399700F11603 /* Default@2x.png in Resources */,
 				9F25BD60151039AF00F11603 /* icon.png in Resources */,
 				9F25BD62151039B400F11603 /* icon@2x.png in Resources */,
-				9F25BD6A1510412700F11603 /* WebView.xib in Resources */,
+				9FA091DD1510627300C6F6AE /* WebViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +306,7 @@
 				9F25BD98151046C800F11603 /* SBJsonUTF8Stream.m in Sources */,
 				9F25BD99151046C800F11603 /* SBJsonWriter.m in Sources */,
 				9F25BD9D151048CD00F11603 /* GWTListViewController.m in Sources */,
+				9FA091DC1510627300C6F6AE /* WebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +428,7 @@
 				9F25BD4B1510354400F11603 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

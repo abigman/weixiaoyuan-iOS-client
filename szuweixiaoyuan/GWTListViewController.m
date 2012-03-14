@@ -8,11 +8,11 @@
 
 #import "GWTListViewController.h"
 
-#import "DetailViewController.h"
 #import "GongwentongFetcher.h"
+#import "WebViewController.h"
 @implementation GWTListViewController
 
-@synthesize detailViewController = _detailViewController;
+@synthesize webViewController = _webViewController;
 @synthesize MainItems;
 @synthesize MasterTVCListtems;
 
@@ -106,17 +106,18 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"GWTListCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     // Configure the cell.
     NSDictionary *t=[self.MasterTVCListtems objectAtIndex:indexPath.row];
-    cell.textLabel.text = [t valueForKeyPath:@"title"]; ;
+    cell.textLabel.text = [t valueForKeyPath:@"title"];
+    cell.detailTextLabel.text=[[NSString alloc] initWithFormat:@"%@%@%@",[t valueForKeyPath:@"posttime"],@" by ",[t valueForKeyPath:@"unit"]];;
     return cell;
 }
 
@@ -160,10 +161,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (!self.detailViewController) {
-        self.detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+    if (!self.webViewController) {
+        self.webViewController = [[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil];
     }
-    [self.navigationController pushViewController:self.detailViewController animated:YES];
+    NSDictionary *t=[self.MasterTVCListtems objectAtIndex:indexPath.row];
+    [self.webViewController setURL:[t valueForKeyPath:@"nid"]];
+    [self.navigationController pushViewController:self.webViewController animated:YES];
 }
 
 @end
