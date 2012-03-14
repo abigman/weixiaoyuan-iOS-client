@@ -10,10 +10,12 @@
 
 #import "DetailViewController.h"
 #import "GWTListViewController.h"
+#import "SZUCALLoginViewController.h"
 @implementation MasterViewController
 
 @synthesize detailViewController = _detailViewController;
 @synthesize gwtListViewController;
+@synthesize szuCALLoginViewController;
 @synthesize MainItems;
 @synthesize MasterTVCListtems;
 
@@ -149,6 +151,12 @@
             self.gwtListViewController = [[GWTListViewController alloc] initWithNibName:@"MasterViewController" bundle:nil];
         }
         [self.navigationController pushViewController:self.gwtListViewController animated:YES];
+    }
+    if (indexPath.row==1) {
+        if (!self.szuCALLoginViewController) {
+            self.szuCALLoginViewController = [[SZUCALLoginViewController alloc] initWithNibName:@"SZUCALLoginViewController" bundle:nil];
+        }
+        [self.navigationController pushViewController:self.szuCALLoginViewController animated:YES];
     }
     if(indexPath.row==5){
         NSString *msg = [[NSString alloc] 

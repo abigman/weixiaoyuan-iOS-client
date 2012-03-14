@@ -10,10 +10,12 @@
 
 @class DetailViewController;
 @class GWTListViewController;
+@class SZUCALLoginViewController;
 @interface MasterViewController : UITableViewController
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
 @property(strong,nonatomic)GWTListViewController *gwtListViewController;
+@property(strong,nonatomic)SZUCALLoginViewController *szuCALLoginViewController;
 @property(strong,nonatomic)NSString *MainItems;
 @property(strong,nonatomic)NSArray *MasterTVCListtems;
 @end

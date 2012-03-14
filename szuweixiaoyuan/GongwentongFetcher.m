@@ -60,4 +60,12 @@
     request=[request stringByReplacingOccurrencesOfString:@"weixiaoyuan.png\"/></a>" withString:@"-->"];
     return request;
 }
++ (NSString *)getSZUCAL:(NSString *)q
+{
+    q = [q stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *tempURL=[[NSString alloc] initWithFormat:@"%@%@",@"http://szucal.com/wap/schedule.php?xing_ming=",q];
+    NSString *request = [NSString stringWithContentsOfURL:[NSURL URLWithString:tempURL] encoding:NSUTF8StringEncoding error:nil];
+    //request=[request stringByReplacingOccurrencesOfString:@"<div class=\"top\">" withString:@"<div class=\"top\"><!--"];
+    return request;
+}
 @end
