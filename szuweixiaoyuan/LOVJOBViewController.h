@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class WebViewController;
 @interface LOVJOBViewController : UITableViewController
 @property(strong,nonatomic)NSArray *jobs;
+@property(strong,nonatomic)WebViewController *webViewController;
 @end

@@ -13,6 +13,7 @@
 
 @synthesize webview;
 @synthesize URL=_URL;
+@synthesize type;//公文还是爱兼职？
 - (void)setURL:(id)newURL
 {
     _URL = newURL;
@@ -33,7 +34,13 @@
     dispatch_async(downloadQueue, ^{
         UIApplication *app = [UIApplication sharedApplication];
         app.networkActivityIndicatorVisible = YES;
-        NSString *getspots = [GongwentongFetcher getGWTContent:_URL];
+        NSString *getspots;
+        if (self.type) {
+            getspots = [GongwentongFetcher getLOVContent:_URL];
+        }else {
+            getspots = [GongwentongFetcher getGWTContent:_URL];
+        }
+        
         
         dispatch_async(dispatch_get_main_queue(), ^{
             

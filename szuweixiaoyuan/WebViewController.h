@@ -13,4 +13,5 @@
 }
 @property (strong, nonatomic) IBOutlet UIWebView *webview;
 @property (strong,nonatomic)NSString *URL;
+@property(strong,nonatomic)NSString *type;
 @end

@@ -8,12 +8,14 @@
 
 #import "LOVJOBViewController.h"
 #import "GongwentongFetcher.h"
+#import "WebViewController.h"
 @interface LOVJOBViewController ()
 
 @end
 
 @implementation LOVJOBViewController
 @synthesize jobs;
+@synthesize webViewController;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -94,9 +96,15 @@
     // Configure the cell.
     NSString *t= [self.jobs objectAtIndex:indexPath.row] ;
     NSArray *array =[[NSArray alloc] initWithArray: [t componentsSeparatedByString:@"<br/>"]];
-    t=[[NSString alloc] initWithFormat:@"%@%@%@%@",[array objectAtIndex:1],[array objectAtIndex:2],[array objectAtIndex:4],[array objectAtIndex:5]];
-    cell.textLabel.text =[array objectAtIndex:3];
-    cell.detailTextLabel.text=t;
+    
+    if ([array count]>4) {
+        t=[[NSString alloc] initWithFormat:@"%@%@%@%@",[array objectAtIndex:1],[array objectAtIndex:2],[array objectAtIndex:4],[array objectAtIndex:5]];
+        cell.textLabel.text =[array objectAtIndex:3];
+        cell.detailTextLabel.text=t;
+    }else {
+        cell.textLabel.text=@"数据错误";
+    }
+    
     return cell;
 }
 
@@ -143,13 +151,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    if (!self.webViewController) {
+        self.webViewController = [[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil];
+    }
+    NSString *t= [self.jobs objectAtIndex:indexPath.row] ;
+    NSArray *array =[[NSArray alloc] initWithArray: [t componentsSeparatedByString:@"<br/>"]];
+    if ([array count]<4)return;
+    [self.webViewController setType:@"lovjob"];
+    [self.webViewController setURL:[array objectAtIndex:0]];
+    [self.navigationController pushViewController:self.webViewController animated:YES];
 }
 
 @end

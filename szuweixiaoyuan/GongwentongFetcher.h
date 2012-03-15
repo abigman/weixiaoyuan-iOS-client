@@ -13,4 +13,5 @@
 + (NSString *)getGWTContent:(NSString *)nid;
 + (NSString *)getSZUCAL:(NSString *)q;
 + (NSArray *)getLOVJOB;
++ (NSString *)getLOVContent:(NSString *)jid;
 @end

@@ -66,14 +66,22 @@
     q = [q stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *tempURL=[[NSString alloc] initWithFormat:@"%@%@",@"http://szucal.com/wap/schedule.php?xing_ming=",q];
     NSString *request = [NSString stringWithContentsOfURL:[NSURL URLWithString:tempURL] encoding:NSUTF8StringEncoding error:nil];
-    //request=[request stringByReplacingOccurrencesOfString:@"<div class=\"top\">" withString:@"<div class=\"top\"><!--"];
+
     return request;
 }
 + (NSArray *)getLOVJOB
 {
     NSString *tempURL=[[NSString alloc] initWithFormat:@"%@",@"http://1.szuapps.sinaapp.com/ios-service/getjob.php"];
     NSString *request = [NSString stringWithContentsOfURL:[NSURL URLWithString:tempURL] encoding:NSUTF8StringEncoding error:nil];
-    //request=[request stringByReplacingOccurrencesOfString:@"<div class=\"top\">" withString:@"<div class=\"top\"><!--"];
+
     return [[NSArray alloc] initWithArray: [request componentsSeparatedByString:@"<br/><hr/>"]];
+}
+//
++ (NSString *)getLOVContent:(NSString *)jid
+{
+    NSString *tempURL=[[NSString alloc] initWithFormat:@"%@%@",@"http://1.szuapps.sinaapp.com/ios-service/j.php?jid=",jid];
+    NSString *request = [NSString stringWithContentsOfURL:[NSURL URLWithString:tempURL] encoding:NSUTF8StringEncoding error:nil];
+
+    return request;
 }
 @end
