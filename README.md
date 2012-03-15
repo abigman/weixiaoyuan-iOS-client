@@ -5,7 +5,8 @@
 IMPORTANT
 ---------
 
-It happens just for fun, dude.
+Please let me know if you want to participate.
+
 
 What is this?
 -------------
@@ -14,7 +15,7 @@ This is a very early version of iOS app for Shenzhen University.
 
 Thanks
 ------
-A big thanks to [深大微校园](http://http://weibo.com/vschool/)  for his work.
+A big thanks to [深大微校园](http://weibo.com/vschool/) [szucal](http://szucal.com) 姨妈糕 [爱兼职](http://www.lovingjob.com/) for their magnificent work.
 
 Licensing
 ---------
