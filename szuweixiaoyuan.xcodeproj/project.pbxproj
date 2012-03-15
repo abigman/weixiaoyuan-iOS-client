@@ -43,6 +43,7 @@
 		9FEA9A5A151095D70022375C /* SZUCALLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FEA9A58151095D70022375C /* SZUCALLoginViewController.xib */; };
 		9FEA9A5E1510989D0022375C /* SZUCALTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FEA9A5D1510989D0022375C /* SZUCALTableViewController.m */; };
 		9FEA9A681510B6570022375C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9FEA9A671510B6570022375C /* README.md */; };
+		9FF05BD01511DE85002530E2 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF05BCF1511DE85002530E2 /* EventKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +109,10 @@
 		9FEA9A5C1510989D0022375C /* SZUCALTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZUCALTableViewController.h; sourceTree = "<group>"; };
 		9FEA9A5D1510989D0022375C /* SZUCALTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZUCALTableViewController.m; sourceTree = "<group>"; };
 		9FEA9A671510B6570022375C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		9FF05BCB1511DE6B002530E2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "/Users/teddy/Dropbox/mac-dev/weixiaoyuan-iOS-client/szuweixiaoyuan/zh-Hans.lproj/DetailViewController.xib"; sourceTree = "<absolute>"; };
+		9FF05BCC1511DE6B002530E2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "/Users/teddy/Dropbox/mac-dev/weixiaoyuan-iOS-client/szuweixiaoyuan/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<absolute>"; };
+		9FF05BCD1511DE6B002530E2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "/Users/teddy/Dropbox/mac-dev/weixiaoyuan-iOS-client/szuweixiaoyuan/zh-Hans.lproj/MasterViewController.xib"; sourceTree = "<absolute>"; };
+		9FF05BCF1511DE85002530E2 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FF05BD01511DE85002530E2 /* EventKit.framework in Frameworks */,
 				9F25BD2A1510354300F11603 /* UIKit.framework in Frameworks */,
 				9F25BD2C1510354300F11603 /* Foundation.framework in Frameworks */,
 				9F25BD2E1510354300F11603 /* CoreGraphics.framework in Frameworks */,
@@ -149,6 +155,7 @@
 		9F25BD281510354300F11603 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9FF05BCF1511DE85002530E2 /* EventKit.framework */,
 				9F25BD291510354300F11603 /* UIKit.framework */,
 				9F25BD2B1510354300F11603 /* Foundation.framework */,
 				9F25BD2D1510354300F11603 /* CoreGraphics.framework */,
@@ -343,6 +350,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				9F25BD331510354300F11603 /* en */,
+				9FF05BCC1511DE6B002530E2 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -351,6 +359,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				9F25BD421510354400F11603 /* en */,
+				9FF05BCD1511DE6B002530E2 /* zh-Hans */,
 			);
 			name = MasterViewController.xib;
 			sourceTree = "<group>";
@@ -359,6 +368,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				9F25BD451510354400F11603 /* en */,
+				9FF05BCB1511DE6B002530E2 /* zh-Hans */,
 			);
 			name = DetailViewController.xib;
 			sourceTree = "<group>";
@@ -386,7 +396,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -404,7 +414,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "715D5C2E-07A6-4B15-84BC-5CC6D94824E5";
 				SDKROOT = iphoneos;

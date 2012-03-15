@@ -66,7 +66,7 @@
     q = [q stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *tempURL=[[NSString alloc] initWithFormat:@"%@%@",@"http://szucal.com/wap/schedule.php?xing_ming=",q];
     NSString *request = [NSString stringWithContentsOfURL:[NSURL URLWithString:tempURL] encoding:NSUTF8StringEncoding error:nil];
-
+    request=[request stringByReplacingOccurrencesOfString:@"</p><p>" withString:@"</p><hr/><p>"];
     return request;
 }
 + (NSArray *)getLOVJOB

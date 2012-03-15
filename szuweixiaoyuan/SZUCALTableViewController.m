@@ -8,6 +8,7 @@
 
 #import "SZUCALTableViewController.h"
 #import "GongwentongFetcher.h"
+#import <EventKit/EventKit.h>
 @interface SZUCALTableViewController ()
 
 @end
@@ -37,8 +38,25 @@
         [array removeObjectAtIndex:[array count]-1];
         [array removeObjectAtIndex:[array count]-1];
         [array removeObjectAtIndex:[array count]-1];
+        //处理一天多节课
+        NSString *datestr;
+        int i=0;
+        NSMutableArray *ret=[[NSMutableArray alloc] init];
+        for (NSString *t in array) {
+            BOOL  found  = ([t rangeOfString:@"号第"].location !=NSNotFound);
+            //NSLog(@"%d",[t rangeOfString:@"号第"].location);
+            if (found) {
+                NSArray *array1 =[[NSArray alloc] initWithArray: [t componentsSeparatedByString:@"："]];
+                datestr=[array1 objectAtIndex:0];
+                [ret insertObject:[[NSString alloc]initWithFormat:@"%@",t] atIndex:i];
+            }else {
+                [ret insertObject:[[NSString alloc]initWithFormat:@"%@：%@",datestr,t] atIndex:i];
+            }
+            i++;
+        
+        }
         dispatch_async(dispatch_get_main_queue(), ^{
-            callist=[[NSArray alloc] initWithArray:array];
+            callist=[[NSArray alloc] initWithArray:ret];
             
             [self.tableView reloadData];
             UIApplication *app = [UIApplication sharedApplication];
@@ -102,7 +120,7 @@
     }
     NSArray *array =[[NSArray alloc] initWithArray: [[callist objectAtIndex:indexPath.row] componentsSeparatedByString:@"："]];
     if (array.count==2) {
-        cell.textLabel.text=[self stringByStrippingHTML:[array objectAtIndex:1]];
+        cell.textLabel.text=[[self stringByStrippingHTML:[array objectAtIndex:1]] stringByReplacingOccurrencesOfString:@"课程于" withString:@""];
         cell.detailTextLabel.text=[self stringByStrippingHTML:[array objectAtIndex:0]];
     }
     
@@ -152,13 +170,109 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
-}
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDate *now;
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit |
+    NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    now=[NSDate date];
+    comps = [calendar components:unitFlags fromDate:now];
+    int year=[comps year];
+    int week = [comps weekday];   
+    int month = [comps month];
+    int day = [comps day];
+    int hour = [comps hour];
+    int min = [comps minute];
+    int sec = [comps second];
+    
+    // Get the event store object  
+    EKEventStore *eventStore = [[EKEventStore alloc] init];  
+    
+    // Create a new event  
+    EKEvent *event  = [EKEvent eventWithEventStore:eventStore];  
+    
+    // Create NSDates to hold the start and end date  
+    NSDate *startDate = [[NSDate alloc] init];  
+    NSDate *endDate  = [[NSDate alloc] init];
+    NSArray *array =[[NSArray alloc] initWithArray: [[callist objectAtIndex:indexPath.row] componentsSeparatedByString:@"："]];
+    if([array count]<2)return;
+    NSString *temp=[[array objectAtIndex:1] stringByReplacingOccurrencesOfString:@"<br/><p>" withString:@"<p>"];
+    temp=[self stringByStrippingHTML:temp];
+    temp=[temp stringByReplacingOccurrencesOfString:@"课程于" withString:@"课程于|"];
+    temp=[temp stringByReplacingOccurrencesOfString:@"在" withString:@"|在"];
+    NSArray *array1 =[[NSArray alloc] initWithArray: [temp componentsSeparatedByString:@"|"]];
+    if([array1 count]<2)return;
+    NSArray *array2 =[[NSArray alloc] initWithArray: [[array1 objectAtIndex:1] componentsSeparatedByString:@"-"]];
+    EKAlarm *alarm = [EKAlarm alarmWithRelativeOffset:-43200];// 1 Day
+    
+    if([array2 count]<2){
+        event.allDay = YES;
+    }else {
+        NSString *st=[self trimString:[array2 objectAtIndex:0]];
+        NSString *et=[self trimString:[array2 objectAtIndex:1]];
+        array1 =[[NSArray alloc] initWithArray: [[self stringByStrippingHTML:[array objectAtIndex:0]] componentsSeparatedByString:@"号"]];
+        if([array1 count]<2)return;
+        temp=[array1 objectAtIndex:0];
+        if([temp intValue]<day-7)month--;
+        st=[[NSString alloc] initWithFormat:@"%d%@%d%@%@%@%@",year,@"-",month,@"-",temp,@" ",st];
+        et=[[NSString alloc] initWithFormat:@"%d%@%d%@%@%@%@",year,@"-",month,@"-",temp,@" ",et];
+        
+        startDate=[self NSStringDateToNSDate:st];
+        endDate=[self NSStringDateToNSDate:et];
+        event.allDay = NO;
+        alarm = [EKAlarm alarmWithRelativeOffset:-1800];// 30 minutes
+        
+        
+    }
+    [event addAlarm:alarm];
+    
+    
+    
+    // Set properties of the new event object  
+    event.title     = [self stringByStrippingHTML:[array objectAtIndex:1]];
+    
 
+    
+    event.startDate = startDate;  
+    event.endDate   = endDate;  
+    NSLog(@"%@",startDate);
+
+    NSLog(@"%@",event.title);
+    
+    // set event's calendar to the default calendar  
+    [event setCalendar:[eventStore defaultCalendarForNewEvents]];  
+    
+    // Create an NSError pointer  
+    NSError *err=[[NSError alloc] init];  
+    
+    // Save the event  
+    [eventStore saveEvent:event span:EKSpanThisEvent error:&err];   
+    NSLog(@"%@",err);
+    // Test for errors  
+    if (err == 0) {  
+        UIAlertView *alert = [[UIAlertView alloc]  
+                              initWithTitle:@"成功添加到手机日历"   
+                              message:event.title   
+                              delegate:nil  
+                              cancelButtonTitle:@"好"   
+                              otherButtonTitles:nil];  
+        [alert show];  
+  
+    }  
+}
+-(NSDate *)NSStringDateToNSDate:(NSString *)string {    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setTimeZone:[NSTimeZone localTimeZone]];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    NSDate *date = [formatter dateFromString:string];
+
+    return date;
+}
+- (NSString *)trimString:(NSString *)str {
+    NSMutableString *mStr = [str mutableCopy];
+    CFStringTrimWhitespace((__bridge CFMutableStringRef)mStr);   
+    NSString *result = [mStr copy];   
+
+    return result;
+}
 @end
