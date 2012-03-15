@@ -12,4 +12,5 @@
 + (NSArray *)getGWTList:(int)page;
 + (NSString *)getGWTContent:(NSString *)nid;
 + (NSString *)getSZUCAL:(NSString *)q;
++ (NSArray *)getLOVJOB;
 @end

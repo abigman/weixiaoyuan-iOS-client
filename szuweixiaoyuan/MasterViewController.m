@@ -11,6 +11,7 @@
 #import "DetailViewController.h"
 #import "GWTListViewController.h"
 #import "SZUCALLoginViewController.h"
+#import "LOVJOBViewController.h"
 @implementation MasterViewController
 
 @synthesize detailViewController = _detailViewController;
@@ -18,7 +19,8 @@
 @synthesize szuCALLoginViewController;
 @synthesize MainItems;
 @synthesize MasterTVCListtems;
-
+@synthesize MasterTVCListsubtitles;
+@synthesize lovJOBViewController;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -41,8 +43,11 @@
     [super viewDidLoad];
  
     self.MasterTVCListtems = [[NSArray alloc] initWithObjects:
-                                @"深圳大学校园公文通", @"我的课程表", @"荔园晨风兼职",
+                                @"深圳大学校园公文通", @"我的课程表", @"爱兼职",
                               @"外卖菜单",@"反馈意见",@"Git项目期待您的加入",nil]; 
+    self.MasterTVCListsubtitles = [[NSArray alloc] initWithObjects:
+                              @"by 深大微校园", @"by szucal.com", @"by www.lovingjob.com",
+                              @"by 你",@"by 你",@"by Github",nil];
 
 }
 
@@ -97,12 +102,13 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 
     // Configure the cell.
     cell.textLabel.text = [self.MasterTVCListtems objectAtIndex:indexPath.row] ;
+    cell.detailTextLabel.text = [self.MasterTVCListsubtitles objectAtIndex:indexPath.row] ;
     return cell;
 }
 
@@ -158,7 +164,13 @@
         }
         [self.navigationController pushViewController:self.szuCALLoginViewController animated:YES];
     }
-    if(indexPath.row>1 && indexPath.row<5){
+    if (indexPath.row==2) {
+        if (!self.lovJOBViewController) {
+            self.lovJOBViewController = [[LOVJOBViewController alloc] initWithNibName:@"MasterViewController" bundle:nil];
+        }
+        [self.navigationController pushViewController:self.lovJOBViewController animated:YES];
+    }
+    if(indexPath.row>2 && indexPath.row<5){
         NSString *msg = [[NSString alloc] 
                          initWithString:@"该功能的开发诚邀您的参与！"];
         UIAlertView *alert = [[UIAlertView alloc]

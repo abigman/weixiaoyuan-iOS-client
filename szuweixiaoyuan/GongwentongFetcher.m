@@ -48,6 +48,7 @@
     int i=0;
     for (NSDictionary *t in temp) {
         [ret insertObject:t atIndex:i];
+        i++;
     }
     
     return ret;
@@ -67,5 +68,12 @@
     NSString *request = [NSString stringWithContentsOfURL:[NSURL URLWithString:tempURL] encoding:NSUTF8StringEncoding error:nil];
     //request=[request stringByReplacingOccurrencesOfString:@"<div class=\"top\">" withString:@"<div class=\"top\"><!--"];
     return request;
+}
++ (NSArray *)getLOVJOB
+{
+    NSString *tempURL=[[NSString alloc] initWithFormat:@"%@",@"http://1.szuapps.sinaapp.com/ios-service/getjob.php"];
+    NSString *request = [NSString stringWithContentsOfURL:[NSURL URLWithString:tempURL] encoding:NSUTF8StringEncoding error:nil];
+    //request=[request stringByReplacingOccurrencesOfString:@"<div class=\"top\">" withString:@"<div class=\"top\"><!--"];
+    return [[NSArray alloc] initWithArray: [request componentsSeparatedByString:@"<br/><hr/>"]];
 }
 @end

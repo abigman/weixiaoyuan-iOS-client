@@ -36,6 +36,9 @@
 		9F25BD9D151048CD00F11603 /* GWTListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F25BD9C151048CD00F11603 /* GWTListViewController.m */; };
 		9FA091DC1510627300C6F6AE /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA091DA1510627300C6F6AE /* WebViewController.m */; };
 		9FA091DD1510627300C6F6AE /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FA091DB1510627300C6F6AE /* WebViewController.xib */; };
+		9FDA90441510F99D00DCA306 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FDA90421510F99D00DCA306 /* Default.png */; };
+		9FDA90451510F99D00DCA306 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FDA90431510F99D00DCA306 /* Default@2x.png */; };
+		9FDA904815119CAB00DCA306 /* LOVJOBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FDA904715119CAB00DCA306 /* LOVJOBViewController.m */; };
 		9FEA9A59151095D70022375C /* SZUCALLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FEA9A57151095D70022375C /* SZUCALLoginViewController.m */; };
 		9FEA9A5A151095D70022375C /* SZUCALLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FEA9A58151095D70022375C /* SZUCALLoginViewController.xib */; };
 		9FEA9A5E1510989D0022375C /* SZUCALTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FEA9A5D1510989D0022375C /* SZUCALTableViewController.m */; };
@@ -95,6 +98,10 @@
 		9FA091D91510627300C6F6AE /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		9FA091DA1510627300C6F6AE /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		9FA091DB1510627300C6F6AE /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
+		9FDA90421510F99D00DCA306 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		9FDA90431510F99D00DCA306 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		9FDA904615119CAB00DCA306 /* LOVJOBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOVJOBViewController.h; sourceTree = "<group>"; };
+		9FDA904715119CAB00DCA306 /* LOVJOBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOVJOBViewController.m; sourceTree = "<group>"; };
 		9FEA9A56151095D70022375C /* SZUCALLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZUCALLoginViewController.h; sourceTree = "<group>"; };
 		9FEA9A57151095D70022375C /* SZUCALLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZUCALLoginViewController.m; sourceTree = "<group>"; };
 		9FEA9A58151095D70022375C /* SZUCALLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SZUCALLoginViewController.xib; sourceTree = "<group>"; };
@@ -120,6 +127,8 @@
 		9F25BD1A1510354300F11603 = {
 			isa = PBXGroup;
 			children = (
+				9FDA90421510F99D00DCA306 /* Default.png */,
+				9FDA90431510F99D00DCA306 /* Default@2x.png */,
 				9FEA9A671510B6570022375C /* README.md */,
 				9F25BD61151039B400F11603 /* icon@2x.png */,
 				9F25BD5F151039AF00F11603 /* icon.png */,
@@ -160,6 +169,8 @@
 				9F25BD9C151048CD00F11603 /* GWTListViewController.m */,
 				9FEA9A5C1510989D0022375C /* SZUCALTableViewController.h */,
 				9FEA9A5D1510989D0022375C /* SZUCALTableViewController.m */,
+				9FDA904615119CAB00DCA306 /* LOVJOBViewController.h */,
+				9FDA904715119CAB00DCA306 /* LOVJOBViewController.m */,
 				9F25BD411510354400F11603 /* MasterViewController.xib */,
 				9F25BD3E1510354300F11603 /* DetailViewController.h */,
 				9F25BD3F1510354300F11603 /* DetailViewController.m */,
@@ -287,6 +298,8 @@
 				9FA091DD1510627300C6F6AE /* WebViewController.xib in Resources */,
 				9FEA9A5A151095D70022375C /* SZUCALLoginViewController.xib in Resources */,
 				9FEA9A681510B6570022375C /* README.md in Resources */,
+				9FDA90441510F99D00DCA306 /* Default.png in Resources */,
+				9FDA90451510F99D00DCA306 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +332,7 @@
 				9FA091DC1510627300C6F6AE /* WebViewController.m in Sources */,
 				9FEA9A59151095D70022375C /* SZUCALLoginViewController.m in Sources */,
 				9FEA9A5E1510989D0022375C /* SZUCALTableViewController.m in Sources */,
+				9FDA904815119CAB00DCA306 /* LOVJOBViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,7 +397,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tao Zhou";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -392,6 +406,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "715D5C2E-07A6-4B15-84BC-5CC6D94824E5";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
