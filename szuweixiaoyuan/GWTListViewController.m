@@ -32,11 +32,7 @@
 }
 
 #pragma mark - View lifecycle
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
+-(void)viewWillAppear:(BOOL)animated{
     dispatch_queue_t downloadQueue = dispatch_queue_create("json downloader", NULL);
     
     
@@ -46,7 +42,7 @@
         NSArray *getspots = [GongwentongFetcher getGWTList:0];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-
+            
             self.MasterTVCListtems = getspots;
             [self.tableView reloadData];
             UIApplication *app = [UIApplication sharedApplication];
@@ -56,6 +52,12 @@
         });
     });
     dispatch_release(downloadQueue);
+}
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    
     
 }
 
@@ -66,10 +68,6 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
 
 - (void)viewDidAppear:(BOOL)animated
 {
