@@ -8,6 +8,7 @@
 
 #import "SZUCALLoginViewController.h"
 #import "SZUCALTableViewController.h"
+#import "FileHelper.h"
 @interface SZUCALLoginViewController ()
 
 @end
@@ -25,7 +26,13 @@
     return self;
 }
 -(void)viewWillAppear:(BOOL)animated{
-    [self.xingming becomeFirstResponder];
+    NSArray *loginarr=[FileHelper readszucal];
+    if([loginarr count]==2){
+        self.xingming.text=[loginarr objectAtIndex:0];
+        self.xuehao.text=[loginarr objectAtIndex:1];
+    }else{
+        [self.xingming becomeFirstResponder];
+    }
 }
 - (void)viewDidLoad
 {
@@ -48,6 +55,8 @@
 }
 
 - (IBAction)loginpressed:(UIButton *)sender {
+    NSArray *loginarr=[[NSArray alloc] initWithObjects:self.xingming.text,self.xuehao.text, nil];
+    [FileHelper savszucal:loginarr];
     if (!self.szuCALTableViewController) {
         self.szuCALTableViewController = [[SZUCALTableViewController alloc] initWithNibName:@"MasterViewController" bundle:nil];
     }

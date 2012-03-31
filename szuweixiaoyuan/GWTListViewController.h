@@ -15,4 +15,6 @@
 @property (strong, nonatomic) WebViewController *webViewController;
 @property(strong,nonatomic)NSString *MainItems;
 @property(strong,nonatomic)NSArray *MasterTVCListtems;
+@property(nonatomic,strong)NSNumber *page;
+@property(nonatomic,strong)NSNumber *loading;
 @end

@@ -7,11 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface WebViewController : UIViewController<UIWebViewDelegate> {    
+#import "WBEngine.h"
+#import "WBSendView.h"
+@interface WebViewController : UIViewController<UIWebViewDelegate,WBEngineDelegate, WBSendViewDelegate> {    
+    NSString *appKey;
+    NSString *appSecret;
     
+    WBEngine *engine;
+    NSMutableArray *timeLine;
+    
+    UITableView *timeLineTableView;
+    UIActivityIndicatorView *indicatorView;
 }
 @property (strong, nonatomic) IBOutlet UIWebView *webview;
 @property (strong,nonatomic)NSString *URL;
 @property(strong,nonatomic)NSString *type;
+@property(strong,nonatomic)NSString *wbtitle;
+@property (nonatomic, retain) WBEngine *weiBoEngine;
 @end

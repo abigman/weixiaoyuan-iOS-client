@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#define cfuuidfile @"cfuuid"
+
 @interface FileHelper : NSObject
+
 + (NSString*) stringWithUUID;
++(void)savszucal:(NSArray *) dictionary;
++(NSArray *)readszucal;
 @end

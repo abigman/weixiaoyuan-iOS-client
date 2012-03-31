@@ -78,11 +78,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-    // Return the number of rows in the section.
     return self.jobs.count;
 }
-
+-(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row==0) {
+        return 80;
+    }else {
+        return 40;
+    }
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"lovjoblistCell";
@@ -92,18 +96,27 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    
     // Configure the cell.
-    NSString *t= [self.jobs objectAtIndex:indexPath.row] ;
-    NSArray *array =[[NSArray alloc] initWithArray: [t componentsSeparatedByString:@"<br/>"]];
     
-    if ([array count]>4) {
-        t=[[NSString alloc] initWithFormat:@"%@%@%@%@",[array objectAtIndex:1],[array objectAtIndex:2],[array objectAtIndex:4],[array objectAtIndex:5]];
-        cell.textLabel.text =[array objectAtIndex:3];
-        cell.detailTextLabel.text=t;
+    if (indexPath.row==0) {
+        cell.textLabel.text=@"找兼职，就选择爱兼职~！";
+        cell.detailTextLabel.text=@"  www.lovingjob.com ";
+
     }else {
-        cell.textLabel.text=@"数据错误";
+        NSString *t= [self.jobs objectAtIndex:indexPath.row-1] ;
+        NSArray *array =[[NSArray alloc] initWithArray: [t componentsSeparatedByString:@"<br/>"]];
+        
+        if ([array count]>4) {
+            t=[[NSString alloc] initWithFormat:@"%@%@%@%@",[array objectAtIndex:1],[array objectAtIndex:2],[array objectAtIndex:4],[array objectAtIndex:5]];
+            cell.textLabel.text =[array objectAtIndex:3];
+            cell.detailTextLabel.text=t;
+        }else {
+            cell.textLabel.text=@"";
+            cell.detailTextLabel.text=@"";
+        }
     }
+    
+    
     
     return cell;
 }
@@ -151,14 +164,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row==0) {
+        return;
+    }
     if (!self.webViewController) {
         self.webViewController = [[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil];
     }
-    NSString *t= [self.jobs objectAtIndex:indexPath.row] ;
+    NSString *t= [self.jobs objectAtIndex:indexPath.row-1] ;
     NSArray *array =[[NSArray alloc] initWithArray: [t componentsSeparatedByString:@"<br/>"]];
     if ([array count]<4)return;
     [self.webViewController setType:@"lovjob"];
     [self.webViewController setURL:[array objectAtIndex:0]];
+    [self.webViewController setWbtitle:[[NSString alloc] initWithFormat:@"%@%@",@"@深圳爱兼职网 分享：",[array objectAtIndex:3]]];
     [self.navigationController pushViewController:self.webViewController animated:YES];
 }
 

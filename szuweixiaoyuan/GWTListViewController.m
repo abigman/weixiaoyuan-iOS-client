@@ -15,6 +15,8 @@
 @synthesize webViewController = _webViewController;
 @synthesize MainItems;
 @synthesize MasterTVCListtems;
+@synthesize page;
+@synthesize loading;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,7 +41,8 @@
     dispatch_async(downloadQueue, ^{
         UIApplication *app = [UIApplication sharedApplication];
         app.networkActivityIndicatorVisible = YES;
-        NSArray *getspots = [GongwentongFetcher getGWTList:0];
+        page=0;
+        NSArray *getspots = [GongwentongFetcher getGWTList:[page intValue]];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
@@ -47,6 +50,7 @@
             [self.tableView reloadData];
             UIApplication *app = [UIApplication sharedApplication];
             app.networkActivityIndicatorVisible = NO;
+            page=[NSNumber numberWithInt:[page intValue]+1];
             //app.statusBarStyle=UIStatusBarStyleBlackTranslucent;
             
         });
@@ -98,7 +102,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.MasterTVCListtems.count;
+    if (self.MasterTVCListtems.count==0) {
+        return 0;
+    }
+    return self.MasterTVCListtems.count+1;
 }
 
 // Customize the appearance of table view cells.
@@ -113,9 +120,15 @@
     }
     
     // Configure the cell.
-    NSDictionary *t=[self.MasterTVCListtems objectAtIndex:indexPath.row];
-    cell.textLabel.text = [t valueForKeyPath:@"title"];
-    cell.detailTextLabel.text=[[NSString alloc] initWithFormat:@"%@%@%@",[t valueForKeyPath:@"posttime"],@" by ",[t valueForKeyPath:@"unit"]];;
+    if (indexPath.row>=self.MasterTVCListtems.count) {
+        cell.textLabel.text =@"  更多…";
+        cell.detailTextLabel.text=nil;
+    }else {
+        NSDictionary *t=[self.MasterTVCListtems objectAtIndex:indexPath.row];
+        cell.textLabel.text = [t valueForKeyPath:@"title"];
+        cell.detailTextLabel.text=[[NSString alloc] initWithFormat:@"%@%@%@",[t valueForKeyPath:@"posttime"],@" by ",[t valueForKeyPath:@"unit"]];
+    }
+    
     return cell;
 }
 
@@ -162,8 +175,37 @@
     if (!self.webViewController) {
         self.webViewController = [[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil];
     }
+    if (indexPath.row>=self.MasterTVCListtems.count){
+        if ([loading intValue]==1) {
+            return;
+        }
+        dispatch_queue_t downloadQueue = dispatch_queue_create("json downloader", NULL);
+        
+        
+        dispatch_async(downloadQueue, ^{
+            loading=[NSNumber numberWithInt:1];
+            UIApplication *app = [UIApplication sharedApplication];
+            app.networkActivityIndicatorVisible = YES;
+            NSArray *getspots = [GongwentongFetcher getGWTList:[page intValue]];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                self.MasterTVCListtems =[self.MasterTVCListtems arrayByAddingObjectsFromArray: getspots];
+                [self.tableView reloadData];
+                loading=[NSNumber numberWithInt:0];
+                UIApplication *app = [UIApplication sharedApplication];
+                app.networkActivityIndicatorVisible = NO;
+                page=[NSNumber numberWithInt:[page intValue]+1];
+                //app.statusBarStyle=UIStatusBarStyleBlackTranslucent;
+                
+            });
+        });
+        dispatch_release(downloadQueue);
+        return;
+    }
     NSDictionary *t=[self.MasterTVCListtems objectAtIndex:indexPath.row];
     [self.webViewController setURL:[t valueForKeyPath:@"nid"]];
+    [self.webViewController setWbtitle:[[NSString alloc] initWithFormat:@"%@%@",@"@深大微校园 深大公文通分享：",[t valueForKeyPath:@"title"]]];
     [self.navigationController pushViewController:self.webViewController animated:YES];
 }
 

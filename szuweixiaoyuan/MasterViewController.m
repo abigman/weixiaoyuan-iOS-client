@@ -12,6 +12,8 @@
 #import "GWTListViewController.h"
 #import "SZUCALLoginViewController.h"
 #import "LOVJOBViewController.h"
+#import "SZULibSrchViewController.h"
+#import "meicanViewController.h"
 @implementation MasterViewController
 
 @synthesize detailViewController = _detailViewController;
@@ -21,6 +23,8 @@
 @synthesize MasterTVCListtems;
 @synthesize MasterTVCListsubtitles;
 @synthesize lovJOBViewController;
+@synthesize szuLibSrchViewController;
+@synthesize MeicanViewController;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -44,10 +48,10 @@
  
     self.MasterTVCListtems = [[NSArray alloc] initWithObjects:
                                 @"深圳大学校园公文通", @"我的课程表", @"爱兼职",
-                              @"外卖菜单",@"反馈意见",@"Git项目期待您的加入",nil]; 
+                              @"图书馆藏书查询",@"外卖菜单",@"反馈意见",@"Git项目期待您的加入",nil]; 
     self.MasterTVCListsubtitles = [[NSArray alloc] initWithObjects:
                               @"by 深大微校园", @"by szucal.com", @"by www.lovingjob.com",
-                              @"by 你",@"by 你",@"by Github",nil];
+                              @"by 深圳大学图书馆",@"by 美餐网meican.com",@"by 你",@"by Github",nil];
 
 }
 
@@ -170,7 +174,19 @@
         }
         [self.navigationController pushViewController:self.lovJOBViewController animated:YES];
     }
-    if(indexPath.row>2 && indexPath.row<5){
+    if (indexPath.row==3) {
+        if (!self.szuLibSrchViewController) {
+            self.szuLibSrchViewController = [[SZULibSrchViewController alloc] initWithNibName:@"SZULibSrchViewController" bundle:nil];
+        }
+        [self.navigationController pushViewController:self.szuLibSrchViewController animated:YES];
+    }
+    if (indexPath.row==4) {
+        if (!self.MeicanViewController) {
+            self.MeicanViewController = [[meicanViewController alloc] initWithNibName:@"MasterViewController" bundle:nil];
+        }
+        [self.navigationController pushViewController:self.MeicanViewController animated:YES];
+    }
+    if(indexPath.row>4 && indexPath.row<6){
         NSString *msg = [[NSString alloc] 
                          initWithString:@"该功能的开发诚邀您的参与！"];
         UIAlertView *alert = [[UIAlertView alloc]
@@ -181,7 +197,7 @@
                               otherButtonTitles:nil];
         [alert show];
     }
-    if(indexPath.row==5){
+    if(indexPath.row==6){
         NSString *msg = [[NSString alloc] 
                          initWithString:@"本项目在Github上的地址是\r\nhttps://github.com/stigliew/weixiaoyuan-iOS-client\r\n期待您的参与哟！\r\n有想法，不能等！\r\n详询短号68469"];
         UIAlertView *alert = [[UIAlertView alloc]

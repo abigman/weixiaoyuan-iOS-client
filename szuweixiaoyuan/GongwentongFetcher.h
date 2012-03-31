@@ -14,4 +14,8 @@
 + (NSString *)getSZUCAL:(NSString *)q;
 + (NSArray *)getLOVJOB;
 + (NSString *)getLOVContent:(NSString *)jid;
++ (NSString *)getlibsrch:(NSString *)q;
++ (NSString *)getlibContent:(NSString *)bid;
++ (NSArray *)getMCList;
++ (NSString *)getMCContent:(NSString *)nid;
 @end

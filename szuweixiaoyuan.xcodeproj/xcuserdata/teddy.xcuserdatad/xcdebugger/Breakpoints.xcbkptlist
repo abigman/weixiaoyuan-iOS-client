@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "szuweixiaoyuan/GongwentongFetcher.m"
-         timestampString = "353389601.912009"
+         timestampString = "354360957.315216"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "41"
-         endingLineNumber = "41"
+         startingLineNumber = "43"
+         endingLineNumber = "43"
          landmarkName = "+executeFetch:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -22,11 +22,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "szuweixiaoyuan/GongwentongFetcher.m"
-         timestampString = "353471960.000743"
+         timestampString = "354711584.798998"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "70"
-         endingLineNumber = "70"
+         startingLineNumber = "78"
+         endingLineNumber = "78"
          landmarkName = "+getSZUCAL:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -35,11 +35,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "szuweixiaoyuan/SZUCALTableViewController.m"
-         timestampString = "353493788.923457"
+         timestampString = "353965331.13021"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "36"
-         endingLineNumber = "36"
+         startingLineNumber = "42"
+         endingLineNumber = "42"
          landmarkName = "-viewWillAppear:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -48,11 +48,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "szuweixiaoyuan/SZUCALTableViewController.m"
-         timestampString = "353501981.986003"
+         timestampString = "353965331.13021"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "59"
-         endingLineNumber = "59"
+         startingLineNumber = "90"
+         endingLineNumber = "90"
          landmarkName = "-viewWillAppear:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -61,11 +61,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "szuweixiaoyuan/SZUCALTableViewController.m"
-         timestampString = "353501981.986003"
+         timestampString = "353965331.13021"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "58"
-         endingLineNumber = "58"
+         startingLineNumber = "89"
+         endingLineNumber = "89"
          landmarkName = "-viewWillAppear:"
          landmarkType = "5">
          <Locations>
@@ -100,11 +100,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "szuweixiaoyuan/SZUCALTableViewController.m"
-         timestampString = "353501981.986003"
+         timestampString = "353965331.13021"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "60"
-         endingLineNumber = "60"
+         startingLineNumber = "91"
+         endingLineNumber = "91"
          landmarkName = "-viewWillAppear:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -113,11 +113,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "szuweixiaoyuan/SZUCALTableViewController.m"
-         timestampString = "353501981.986003"
+         timestampString = "354711453.94786"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "126"
-         endingLineNumber = "126"
+         startingLineNumber = "190"
+         endingLineNumber = "190"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -126,11 +126,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "szuweixiaoyuan/SZUCALTableViewController.m"
-         timestampString = "353501981.986003"
+         timestampString = "354711453.94786"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "121"
-         endingLineNumber = "121"
+         startingLineNumber = "170"
+         endingLineNumber = "170"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -139,11 +139,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "szuweixiaoyuan/SZUCALTableViewController.m"
-         timestampString = "353501981.986003"
+         timestampString = "354711453.94786"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "123"
-         endingLineNumber = "123"
+         startingLineNumber = "172"
+         endingLineNumber = "172"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -152,11 +152,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "szuweixiaoyuan/SZUCALTableViewController.m"
-         timestampString = "353501981.986003"
+         timestampString = "354711453.94786"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "199"
-         endingLineNumber = "199"
+         startingLineNumber = "272"
+         endingLineNumber = "272"
          landmarkName = "-tableView:didSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -165,11 +165,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "szuweixiaoyuan/SZUCALTableViewController.m"
-         timestampString = "353502552.665598"
+         timestampString = "354711453.94786"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "243"
-         endingLineNumber = "243"
+         startingLineNumber = "311"
+         endingLineNumber = "311"
          landmarkName = "-tableView:didSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -178,11 +178,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "szuweixiaoyuan/SZUCALTableViewController.m"
-         timestampString = "353501981.986003"
+         timestampString = "353965331.13021"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "53"
-         endingLineNumber = "53"
+         startingLineNumber = "83"
+         endingLineNumber = "83"
          landmarkName = "-viewWillAppear:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -191,12 +191,207 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "szuweixiaoyuan/SZUCALTableViewController.m"
-         timestampString = "353501981.986003"
+         timestampString = "353965331.13021"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "58"
+         endingLineNumber = "58"
+         landmarkName = "-viewWillAppear:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "szuweixiaoyuan/SZULibSrchViewController.m"
+         timestampString = "354340627.716528"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "167"
+         endingLineNumber = "167"
+         landmarkName = "-handleSearchForTerm:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "szuweixiaoyuan/SZULibSrchViewController.m"
+         timestampString = "353560533.488943"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "84"
+         endingLineNumber = "84"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "szuweixiaoyuan/SZULibSrchViewController.m"
+         timestampString = "353560533.488943"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "86"
+         endingLineNumber = "86"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "szuweixiaoyuan/GongwentongFetcher.m"
+         timestampString = "354711584.798998"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "99"
+         endingLineNumber = "99"
+         landmarkName = "+getlibsrch:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "szuweixiaoyuan/FileHelper.m"
+         timestampString = "353923553.57295"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "65"
+         endingLineNumber = "65"
+         landmarkName = "+readszucal"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "szuweixiaoyuan/FileHelper.m"
+         timestampString = "353584969.694727"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "47"
+         endingLineNumber = "47"
+         landmarkName = "+savszucal:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "szuweixiaoyuan/SZUCALTableViewController.m"
+         timestampString = "353965331.13021"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "46"
          endingLineNumber = "46"
          landmarkName = "-viewWillAppear:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "szuweixiaoyuan/SZUCALTableViewController.m"
+         timestampString = "353965331.13021"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "142"
+         endingLineNumber = "142"
+         landmarkName = "-tableView:titleForHeaderInSection:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "szuweixiaoyuan/SZUCALTableViewController.m"
+         timestampString = "353965331.13021"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "138"
+         endingLineNumber = "138"
+         landmarkName = "-tableView:numberOfRowsInSection:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "szuweixiaoyuan/SZUCALTableViewController.m"
+         timestampString = "353965331.13021"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "132"
+         endingLineNumber = "132"
+         landmarkName = "-numberOfSectionsInTableView:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "szuweixiaoyuan/GWTListViewController.h"
+         timestampString = "353963913.994477"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "19"
+         endingLineNumber = "19"
+         landmarkName = "loading"
+         landmarkType = "19">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "szuweixiaoyuan/GWTListViewController.m"
+         timestampString = "353964471.368824"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "124"
+         endingLineNumber = "124"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "SinaWeiBoSDK/SinaWeiBoSDK/SinaWeiBoSDK/SFHFKeychainUtils/SFHFKeychainUtils.m"
+         timestampString = "354345053.602945"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "224"
+         endingLineNumber = "224"
+         landmarkName = "+getPasswordForUsername:andServiceName:error:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "SinaWeiBoSDK/SinaWeiBoSDK/SinaWeiBoSDK/SFHFKeychainUtils/SFHFKeychainUtils.m"
+         timestampString = "354345371.222434"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "363"
+         endingLineNumber = "363"
+         landmarkName = "+storeUsername:andPassword:forServiceName:updateExisting:error:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "SinaWeiBoSDK/SinaWeiBoSDK/SinaWeiBoSDK/SBJSON/SBJSON.m"
+         timestampString = "354358503.704865"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "123"
+         endingLineNumber = "123"
+         landmarkName = "-objectWithString:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

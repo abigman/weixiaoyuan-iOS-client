@@ -16,6 +16,10 @@
 @implementation SZUCALTableViewController
 @synthesize q;
 @synthesize callist;
+@synthesize headers;
+@synthesize sectioncounts;
+@synthesize event;
+@synthesize eventStore;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -34,6 +38,11 @@
         NSString *getspots = [GongwentongFetcher getSZUCAL:q];
         getspots=[getspots stringByReplacingOccurrencesOfString:@"<hr />" withString:@"<hr/>"];
         NSMutableArray *array =[[NSMutableArray alloc] initWithArray: [getspots componentsSeparatedByString:@"<hr/>"]];
+        if ([array count]<5) {
+            UIApplication *app = [UIApplication sharedApplication];
+            app.networkActivityIndicatorVisible = NO;
+            return;
+        }
         [array removeObjectAtIndex:0];
         [array removeObjectAtIndex:[array count]-1];
         [array removeObjectAtIndex:[array count]-1];
@@ -41,23 +50,47 @@
         //处理一天多节课
         NSString *datestr;
         int i=0;
+        int c=1;
         NSMutableArray *ret=[[NSMutableArray alloc] init];
+        NSMutableArray *hret=[[NSMutableArray alloc] init];
+        NSMutableArray *scret=[[NSMutableArray alloc] init];
         for (NSString *t in array) {
             BOOL  found  = ([t rangeOfString:@"号第"].location !=NSNotFound);
             //NSLog(@"%d",[t rangeOfString:@"号第"].location);
             if (found) {
+                if (i>0) {
+                    [scret insertObject:[NSNumber numberWithInt:c] atIndex:[scret count]];
+                    c=1;
+                }
                 NSArray *array1 =[[NSArray alloc] initWithArray: [t componentsSeparatedByString:@"："]];
                 datestr=[array1 objectAtIndex:0];
+                [hret insertObject:datestr atIndex:[hret count]];
                 [ret insertObject:[[NSString alloc]initWithFormat:@"%@",t] atIndex:i];
             }else {
+                if (!datestr) {
+                    UIAlertView *alert = [[UIAlertView alloc]  
+                                          initWithTitle:@"出错了，老大"   
+                                          message:@"你有可能是已经毕业了，要不然就是szucal的数据木有更新"   
+                                          delegate:nil 
+                                          cancelButtonTitle:@"好"   
+                                          otherButtonTitles:nil];  
+                    [alert show];
+                    UIApplication *app = [UIApplication sharedApplication];
+                    app.networkActivityIndicatorVisible = NO;
+                    return;
+                }
+                c++;
                 [ret insertObject:[[NSString alloc]initWithFormat:@"%@：%@",datestr,t] atIndex:i];
             }
             i++;
         
         }
+        [scret insertObject:[NSNumber numberWithInt:c] atIndex:[scret count]];
         dispatch_async(dispatch_get_main_queue(), ^{
             callist=[[NSArray alloc] initWithArray:ret];
-            
+            headers=[[NSArray alloc] initWithArray:hret];
+            sectioncounts=[[NSArray alloc] initWithArray:scret];
+
             [self.tableView reloadData];
             UIApplication *app = [UIApplication sharedApplication];
             app.networkActivityIndicatorVisible = NO;
@@ -70,7 +103,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    // Get the event store object  
+    eventStore = [[EKEventStore alloc] init];  
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -95,13 +129,17 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 
-    return 1;
+    return [headers count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 
-    return callist.count;
+    return [[sectioncounts objectAtIndex:section] intValue];
+}
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+
+    return [headers objectAtIndex:section];
 }
 -(NSString *) stringByStrippingHTML:(NSString *)input {
     NSRange r;
@@ -118,10 +156,36 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    NSArray *array =[[NSArray alloc] initWithArray: [[callist objectAtIndex:indexPath.row] componentsSeparatedByString:@"："]];
+    cell.detailTextLabel.text=@"";
+    cell.textLabel.text=@"";
+    int count=0;
+    int actualrow=indexPath.row;
+    for (NSNumber *t in sectioncounts) {
+        if (count<indexPath.section) {
+            actualrow=actualrow+[t intValue];
+            count++;
+        }
+        
+    }
+    NSArray *array =[[NSArray alloc] initWithArray: [[callist objectAtIndex:actualrow] componentsSeparatedByString:@"："]];
     if (array.count==2) {
         cell.textLabel.text=[[self stringByStrippingHTML:[array objectAtIndex:1]] stringByReplacingOccurrencesOfString:@"课程于" withString:@""];
-        cell.detailTextLabel.text=[self stringByStrippingHTML:[array objectAtIndex:0]];
+        cell.detailTextLabel.text=[self stringByStrippingHTML:[array objectAtIndex:1]];
+        BOOL  found  = ([cell.detailTextLabel.text
+                         rangeOfString:@"由 "].location !=NSNotFound);
+        if (found) {
+            cell.detailTextLabel.text=[cell.detailTextLabel.text 
+                                       substringFromIndex:
+                                       [cell.detailTextLabel.text
+                                        rangeOfString:@"由 "].location+2];
+            cell.detailTextLabel.text=[cell.detailTextLabel.text 
+                                       substringToIndex:
+                                       [cell.detailTextLabel.text
+                                        rangeOfString:@" "].location];
+        }else {
+            cell.detailTextLabel.text=@"发呆日";
+        }
+        
     }
     
     return cell;
@@ -178,23 +242,32 @@
     now=[NSDate date];
     comps = [calendar components:unitFlags fromDate:now];
     int year=[comps year];
-    int week = [comps weekday];   
+    //int week = [comps weekday];   
     int month = [comps month];
     int day = [comps day];
-    int hour = [comps hour];
-    int min = [comps minute];
-    int sec = [comps second];
+    //int hour = [comps hour];
+    //int min = [comps minute];
+    //int sec = [comps second];
     
     // Get the event store object  
-    EKEventStore *eventStore = [[EKEventStore alloc] init];  
+    //EKEventStore *eventStore = [[EKEventStore alloc] init];  
     
     // Create a new event  
-    EKEvent *event  = [EKEvent eventWithEventStore:eventStore];  
+    event  = [EKEvent eventWithEventStore:eventStore];  
     
     // Create NSDates to hold the start and end date  
     NSDate *startDate = [[NSDate alloc] init];  
     NSDate *endDate  = [[NSDate alloc] init];
-    NSArray *array =[[NSArray alloc] initWithArray: [[callist objectAtIndex:indexPath.row] componentsSeparatedByString:@"："]];
+    int count=0;
+    int actualrow=indexPath.row;
+    for (NSNumber *t in sectioncounts) {
+        if (count<indexPath.section) {
+            actualrow=actualrow+[t intValue];
+            count++;
+        }
+        
+    }
+    NSArray *array =[[NSArray alloc] initWithArray: [[callist objectAtIndex:actualrow] componentsSeparatedByString:@"："]];
     if([array count]<2)return;
     NSString *temp=[[array objectAtIndex:1] stringByReplacingOccurrencesOfString:@"<br/><p>" withString:@"<p>"];
     temp=[self stringByStrippingHTML:temp];
@@ -230,35 +303,58 @@
     
     // Set properties of the new event object  
     event.title     = [self stringByStrippingHTML:[array objectAtIndex:1]];
-    
 
-    
     event.startDate = startDate;  
     event.endDate   = endDate;  
-    NSLog(@"%@",startDate);
-
-    NSLog(@"%@",event.title);
     
     // set event's calendar to the default calendar  
     [event setCalendar:[eventStore defaultCalendarForNewEvents]];  
-    
-    // Create an NSError pointer  
+    UIAlertView *alert = [[UIAlertView alloc]  
+                          initWithTitle:@"添加到手机日历？"   
+                          message:event.title   
+                          delegate:self  
+                          cancelButtonTitle:@"那不能"   
+                          otherButtonTitles:@"好",nil];  
+    [alert show];
+ 
+}
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0)
+    {
+        return;
+    }
+    if (buttonIndex == 1)
+    {
+        
+    }
+    if (buttonIndex == 2)
+    {
+        
+    }
     NSError *err=[[NSError alloc] init];  
-    
     // Save the event  
     [eventStore saveEvent:event span:EKSpanThisEvent error:&err];   
     NSLog(@"%@",err);
     // Test for errors  
     if (err == 0) {  
         UIAlertView *alert = [[UIAlertView alloc]  
-                              initWithTitle:@"成功添加到手机日历"   
+                              initWithTitle:@"已添加:"   
                               message:event.title   
-                              delegate:nil  
+                              delegate:nil 
                               cancelButtonTitle:@"好"   
                               otherButtonTitles:nil];  
-        [alert show];  
-  
-    }  
+        //[alert show];  
+        
+    }else {
+        UIAlertView *alert = [[UIAlertView alloc]  
+                              initWithTitle:@"出错了"   
+                              message:@"哎…"   
+                              delegate:nil 
+                              cancelButtonTitle:@"好"   
+                              otherButtonTitles:nil];  
+        [alert show];
+    }
+    
 }
 -(NSDate *)NSStringDateToNSDate:(NSString *)string {    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
