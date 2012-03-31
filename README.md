@@ -15,7 +15,7 @@ This is a very early version of iOS app for Shenzhen University.
 
 Thanks
 ------
-A big thanks to [深大微校园](http://weibo.com/vschool/) [szucal](http://szucal.com) 姨妈糕 [爱兼职](http://www.lovingjob.com/) for their magnificent work.
+A big thanks to [@深大微校园](http://weibo.com/vschool/) [szucal](http://szucal.com) @木木糕 [爱兼职](http://www.lovingjob.com/) for their magnificent work.
 
 Licensing
 ---------
