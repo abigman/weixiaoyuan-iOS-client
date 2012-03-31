@@ -42,6 +42,27 @@
     
     return results;
 }
++ (NSArray *)getMAILList:(int)page
+{
+    NSString *request = [NSString stringWithFormat:@"http://vlinju.sinaapp.com/schoolnews/mailboxs?page=%d",page];
+    NSDictionary *temp=[self executeFetch:request];
+    NSMutableArray *ret=[[NSMutableArray alloc] init];
+    int i=0;
+    for (NSDictionary *t in temp) {
+        [ret insertObject:t atIndex:i];
+        i++;
+    }
+    
+    return ret;
+}
++ (NSString *)getMAILContent:(NSString *)nid
+{
+    NSString *tempURL=[[NSString alloc] initWithFormat:@"%@%@",@"http://vlinju.sinaapp.com/html5/mailbox_content?mid=",nid];
+    NSString *request = [NSString stringWithContentsOfURL:[NSURL URLWithString:tempURL] encoding:NSUTF8StringEncoding error:nil];
+    request=[request stringByReplacingOccurrencesOfString:@"<div class=\"top\">" withString:@"<div class=\"top\"><!--"];
+    request=[request stringByReplacingOccurrencesOfString:@"weixiaoyuan.png\"/></a>" withString:@"-->"];
+    return request;
+}
 + (NSArray *)getGWTList:(int)page
 {
     NSString *request = [NSString stringWithFormat:@"http://vlinju.sinaapp.com/schoolnews/lists?school_code=szu&page=%d",page];

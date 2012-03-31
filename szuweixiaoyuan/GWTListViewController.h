@@ -17,4 +17,5 @@
 @property(strong,nonatomic)NSArray *MasterTVCListtems;
 @property(nonatomic,strong)NSNumber *page;
 @property(nonatomic,strong)NSNumber *loading;
+@property(nonatomic,strong)NSString *type;
 @end

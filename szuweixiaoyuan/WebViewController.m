@@ -5,7 +5,7 @@
 //  Created by mac pro on 12-3-14.
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
-////http://service.weibo.com/share/share.php?appkey=2498151062&pic=&ralateUid=&language=zh_cn&url=&title=
+//
 
 #import "WebViewController.h"
 #import "GongwentongFetcher.h"
@@ -80,6 +80,10 @@
                 self.title=@"";
                 getspots = [GongwentongFetcher getMCContent:_URL];
                 sourceurl=[[NSString alloc]initWithFormat:@"%@%@", @"http://meican.com/restaurant/",_URL];
+            }else if ([self.type isEqualToString:@"xzxx"]) {
+                self.title=@"";
+                getspots = [GongwentongFetcher getMAILContent:_URL];
+                sourceurl=[[NSString alloc]initWithFormat:@"%@%@", @"http://www.weixiaoyuan.com/html5/mailbox_content?mid=",_URL];
             }else{
                 self.title=@"";
                 getspots = [GongwentongFetcher getLOVContent:_URL];

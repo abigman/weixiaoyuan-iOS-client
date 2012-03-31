@@ -18,4 +18,6 @@
 + (NSString *)getlibContent:(NSString *)bid;
 + (NSArray *)getMCList;
 + (NSString *)getMCContent:(NSString *)nid;
++ (NSArray *)getMAILList:(int)page;
++ (NSString *)getMAILContent:(NSString *)nid;
 @end

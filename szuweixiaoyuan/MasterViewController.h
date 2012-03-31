@@ -18,6 +18,7 @@
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
 @property(strong,nonatomic)GWTListViewController *gwtListViewController;
+@property(strong,nonatomic)GWTListViewController *mailListViewController;
 @property(strong,nonatomic)SZUCALLoginViewController *szuCALLoginViewController;
 @property(strong,nonatomic)LOVJOBViewController *lovJOBViewController;
 @property(strong,nonatomic)SZULibSrchViewController *szuLibSrchViewController;

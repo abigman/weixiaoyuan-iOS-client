@@ -17,6 +17,7 @@
 @synthesize MasterTVCListtems;
 @synthesize page;
 @synthesize loading;
+@synthesize type;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,8 +43,13 @@
         UIApplication *app = [UIApplication sharedApplication];
         app.networkActivityIndicatorVisible = YES;
         page=0;
-        NSArray *getspots = [GongwentongFetcher getGWTList:[page intValue]];
-        
+        NSArray *getspots;
+        if (self.type) {
+            self.title=@"校长信箱";
+            getspots = [GongwentongFetcher getMAILList:[page intValue]];
+        }else {
+            getspots = [GongwentongFetcher getGWTList:[page intValue]];
+        }
         dispatch_async(dispatch_get_main_queue(), ^{
             
             self.MasterTVCListtems = getspots;
@@ -126,7 +132,12 @@
     }else {
         NSDictionary *t=[self.MasterTVCListtems objectAtIndex:indexPath.row];
         cell.textLabel.text = [t valueForKeyPath:@"title"];
-        cell.detailTextLabel.text=[[NSString alloc] initWithFormat:@"%@%@%@",[t valueForKeyPath:@"posttime"],@" by ",[t valueForKeyPath:@"unit"]];
+        if (self.type) {
+            cell.detailTextLabel.text=[[NSString alloc] initWithFormat:@"回复时间%@",[t valueForKeyPath:@"reply_time"]];
+        }else {
+            cell.detailTextLabel.text=[[NSString alloc] initWithFormat:@"%@%@%@",[t valueForKeyPath:@"posttime"],@" by ",[t valueForKeyPath:@"unit"]];
+        }
+        
     }
     
     return cell;
@@ -186,7 +197,13 @@
             loading=[NSNumber numberWithInt:1];
             UIApplication *app = [UIApplication sharedApplication];
             app.networkActivityIndicatorVisible = YES;
-            NSArray *getspots = [GongwentongFetcher getGWTList:[page intValue]];
+            NSArray *getspots;
+            if (self.type) {
+                self.title=@"校长信箱";
+                getspots = [GongwentongFetcher getMAILList:[page intValue]];
+            }else {
+                getspots = [GongwentongFetcher getGWTList:[page intValue]];
+            }
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
@@ -204,8 +221,15 @@
         return;
     }
     NSDictionary *t=[self.MasterTVCListtems objectAtIndex:indexPath.row];
-    [self.webViewController setURL:[t valueForKeyPath:@"nid"]];
-    [self.webViewController setWbtitle:[[NSString alloc] initWithFormat:@"%@%@",@"@深大微校园 深大公文通分享：",[t valueForKeyPath:@"title"]]];
+    if (self.type) {
+        [self.webViewController setURL:[t valueForKeyPath:@"mid"]];
+        [self.webViewController setType:@"xzxx"];
+        [self.webViewController setWbtitle:[[NSString alloc] initWithFormat:@"%@%@",@"@深大微校园 深大校长信箱分享：",[t valueForKeyPath:@"title"]]];
+    }else {
+        [self.webViewController setURL:[t valueForKeyPath:@"nid"]];
+        [self.webViewController setWbtitle:[[NSString alloc] initWithFormat:@"%@%@",@"@深大微校园 深大公文通分享：",[t valueForKeyPath:@"title"]]];
+    }
+    
     [self.navigationController pushViewController:self.webViewController animated:YES];
 }
 
