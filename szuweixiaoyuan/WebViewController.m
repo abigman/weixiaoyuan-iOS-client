@@ -39,6 +39,9 @@
     }
     return self;
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [webview loadHTMLString:@"<center>读取中 ……</center>" baseURL:nil];
+}
 -(void)viewDidAppear:(BOOL)animated{
     
     UIToolbar* tools = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 148, 45)]; 
@@ -110,6 +113,7 @@
     });
     dispatch_release(downloadQueue);
 }
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

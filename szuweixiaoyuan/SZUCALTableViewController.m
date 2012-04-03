@@ -35,61 +35,10 @@
     dispatch_async(downloadQueue, ^{
         UIApplication *app = [UIApplication sharedApplication];
         app.networkActivityIndicatorVisible = YES;
-        NSString *getspots = [GongwentongFetcher getSZUCAL:q];
-        getspots=[getspots stringByReplacingOccurrencesOfString:@"<hr />" withString:@"<hr/>"];
-        NSMutableArray *array =[[NSMutableArray alloc] initWithArray: [getspots componentsSeparatedByString:@"<hr/>"]];
-        if ([array count]<5) {
-            UIApplication *app = [UIApplication sharedApplication];
-            app.networkActivityIndicatorVisible = NO;
-            return;
-        }
-        [array removeObjectAtIndex:0];
-        [array removeObjectAtIndex:[array count]-1];
-        [array removeObjectAtIndex:[array count]-1];
-        [array removeObjectAtIndex:[array count]-1];
-        //处理一天多节课
-        NSString *datestr;
-        int i=0;
-        int c=1;
-        NSMutableArray *ret=[[NSMutableArray alloc] init];
-        NSMutableArray *hret=[[NSMutableArray alloc] init];
-        NSMutableArray *scret=[[NSMutableArray alloc] init];
-        for (NSString *t in array) {
-            BOOL  found  = ([t rangeOfString:@"号第"].location !=NSNotFound);
-            //NSLog(@"%d",[t rangeOfString:@"号第"].location);
-            if (found) {
-                if (i>0) {
-                    [scret insertObject:[NSNumber numberWithInt:c] atIndex:[scret count]];
-                    c=1;
-                }
-                NSArray *array1 =[[NSArray alloc] initWithArray: [t componentsSeparatedByString:@"："]];
-                datestr=[array1 objectAtIndex:0];
-                [hret insertObject:datestr atIndex:[hret count]];
-                [ret insertObject:[[NSString alloc]initWithFormat:@"%@",t] atIndex:i];
-            }else {
-                if (!datestr) {
-                    UIAlertView *alert = [[UIAlertView alloc]  
-                                          initWithTitle:@"出错了，老大"   
-                                          message:@"你有可能是已经毕业了，要不然就是szucal的数据木有更新"   
-                                          delegate:nil 
-                                          cancelButtonTitle:@"好"   
-                                          otherButtonTitles:nil];  
-                    [alert show];
-                    UIApplication *app = [UIApplication sharedApplication];
-                    app.networkActivityIndicatorVisible = NO;
-                    return;
-                }
-                c++;
-                [ret insertObject:[[NSString alloc]initWithFormat:@"%@：%@",datestr,t] atIndex:i];
-            }
-            i++;
-        
-        }
-        [scret insertObject:[NSNumber numberWithInt:c] atIndex:[scret count]];
+        NSArray *getspots = [GongwentongFetcher getSZUCAL:q];
+
         dispatch_async(dispatch_get_main_queue(), ^{
-            callist=[[NSArray alloc] initWithArray:ret];
-            headers=[[NSArray alloc] initWithArray:hret];
-            sectioncounts=[[NSArray alloc] initWithArray:scret];
+            callist=getspots;
 
             [self.tableView reloadData];
             UIApplication *app = [UIApplication sharedApplication];
@@ -129,17 +78,25 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 
-    return [headers count];
+    return [callist count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-    return [[sectioncounts objectAtIndex:section] intValue];
+    NSDictionary *temp=[callist objectAtIndex:section];
+    NSArray *temp1=[temp objectForKey:@"courses"];
+    if ([temp1 count]==0) {
+        return 1;
+    }
+    return [temp1 count];
 }
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
 
-    return [headers objectAtIndex:section];
+    NSDictionary *temp=[callist objectAtIndex:section];
+    return [[NSString alloc] initWithFormat:@"%@月%@日 - 第%@周",
+            [temp objectForKey:@"month"],
+            [temp objectForKey:@"day"],
+            [temp objectForKey:@"week"]];
 }
 -(NSString *) stringByStrippingHTML:(NSString *)input {
     NSRange r;
@@ -158,32 +115,25 @@
     }
     cell.detailTextLabel.text=@"";
     cell.textLabel.text=@"";
-    int count=0;
-    int actualrow=indexPath.row;
-    for (NSNumber *t in sectioncounts) {
-        if (count<indexPath.section) {
-            actualrow=actualrow+[t intValue];
-            count++;
-        }
-        
-    }
-    NSArray *array =[[NSArray alloc] initWithArray: [[callist objectAtIndex:actualrow] componentsSeparatedByString:@"："]];
-    if (array.count==2) {
-        cell.textLabel.text=[[self stringByStrippingHTML:[array objectAtIndex:1]] stringByReplacingOccurrencesOfString:@"课程于" withString:@""];
-        cell.detailTextLabel.text=[self stringByStrippingHTML:[array objectAtIndex:1]];
-        BOOL  found  = ([cell.detailTextLabel.text
-                         rangeOfString:@"由 "].location !=NSNotFound);
-        if (found) {
-            cell.detailTextLabel.text=[cell.detailTextLabel.text 
-                                       substringFromIndex:
-                                       [cell.detailTextLabel.text
-                                        rangeOfString:@"由 "].location+2];
-            cell.detailTextLabel.text=[cell.detailTextLabel.text 
-                                       substringToIndex:
-                                       [cell.detailTextLabel.text
-                                        rangeOfString:@" "].location];
+    NSDictionary *temp=[callist objectAtIndex:indexPath.section];
+    NSArray *temp1=[temp objectForKey:@"courses"];
+    if ([temp1 count]==0) {
+        cell.detailTextLabel.text=@"本日休假";
+        cell.textLabel.text=@"没有安排";
+    }else{
+        temp=[temp1 objectAtIndex:indexPath.row];
+        cell.textLabel.text=[[NSString alloc] initWithFormat:@"%@-%@",
+                             [temp objectForKey:@"course_name"],
+                             [temp objectForKey:@"professor"]];
+        if ([[temp objectForKey:@"section_order"] intValue]!=70) {
+            cell.detailTextLabel.text=[[NSString alloc] initWithFormat:@"%@ - %@ 在 %@",
+                                       [temp objectForKey:@"begin"],
+                                       [temp objectForKey:@"end"],
+                                       [temp objectForKey:@"locale"]];
         }else {
-            cell.detailTextLabel.text=@"发呆日";
+            cell.detailTextLabel.text=[[NSString alloc] initWithFormat:@"%@ 在 %@",
+                                       [temp objectForKey:@"begin"],
+                                       [temp objectForKey:@"locale"]];
         }
         
     }
@@ -234,20 +184,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDate *now;
-    NSDateComponents *comps = [[NSDateComponents alloc] init];
-    NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit |
-    NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
-    now=[NSDate date];
-    comps = [calendar components:unitFlags fromDate:now];
-    int year=[comps year];
-    //int week = [comps weekday];   
-    int month = [comps month];
-    int day = [comps day];
-    //int hour = [comps hour];
-    //int min = [comps minute];
-    //int sec = [comps second];
+
+    
+
     
     // Get the event store object  
     //EKEventStore *eventStore = [[EKEventStore alloc] init];  
@@ -258,51 +197,49 @@
     // Create NSDates to hold the start and end date  
     NSDate *startDate = [[NSDate alloc] init];  
     NSDate *endDate  = [[NSDate alloc] init];
-    int count=0;
-    int actualrow=indexPath.row;
-    for (NSNumber *t in sectioncounts) {
-        if (count<indexPath.section) {
-            actualrow=actualrow+[t intValue];
-            count++;
+    
+    EKAlarm *alarm = [EKAlarm alarmWithRelativeOffset:-43200];// 1 Day
+    
+    NSDictionary *temp=[callist objectAtIndex:indexPath.section];
+    
+    NSArray *temp1=[temp objectForKey:@"courses"];
+    int year=[[temp objectForKey:@"year"] intValue];  
+    int month = [[temp objectForKey:@"month"] intValue];
+    int day = [[temp objectForKey:@"day"] intValue];
+    
+    if ([temp1 count]==0) {
+        return;
+    }else{
+        temp=[temp1 objectAtIndex:indexPath.row];
+        
+        event.title =[[NSString alloc] initWithFormat:@"%@-%@",
+                             [temp objectForKey:@"course_name"],
+                             [temp objectForKey:@"professor"]];
+        if ([[temp objectForKey:@"section_order"] intValue]!=70) {
+            event.allDay = NO;
+            alarm = [EKAlarm alarmWithRelativeOffset:-1800];
+            NSString *st=[[NSString alloc] initWithFormat:@"%d%@%d%@%d%@%@",year,@"-",month,@"-",day,@" ",[temp objectForKey:@"begin"]];
+            NSString *et=[[NSString alloc] initWithFormat:@"%d%@%d%@%d%@%@",year,@"-",month,@"-",day,@" ",[temp objectForKey:@"end"]];
+            
+            startDate=[self NSStringDateToNSDate:st];
+            endDate=[self NSStringDateToNSDate:et];
+            
+        }else {
+            event.allDay = YES;
+            NSString *st=[[NSString alloc] initWithFormat:@"%d%@%d%@%d%@",year,@"-",month,@"-",day,@" 00:00"];
+            
+            startDate=[self NSStringDateToNSDate:st];
+            endDate=[self NSStringDateToNSDate:st];
         }
         
     }
-    NSArray *array =[[NSArray alloc] initWithArray: [[callist objectAtIndex:actualrow] componentsSeparatedByString:@"："]];
-    if([array count]<2)return;
-    NSString *temp=[[array objectAtIndex:1] stringByReplacingOccurrencesOfString:@"<br/><p>" withString:@"<p>"];
-    temp=[self stringByStrippingHTML:temp];
-    temp=[temp stringByReplacingOccurrencesOfString:@"课程于" withString:@"课程于|"];
-    temp=[temp stringByReplacingOccurrencesOfString:@"在" withString:@"|在"];
-    NSArray *array1 =[[NSArray alloc] initWithArray: [temp componentsSeparatedByString:@"|"]];
-    if([array1 count]<2)return;
-    NSArray *array2 =[[NSArray alloc] initWithArray: [[array1 objectAtIndex:1] componentsSeparatedByString:@"-"]];
-    EKAlarm *alarm = [EKAlarm alarmWithRelativeOffset:-43200];// 1 Day
     
-    if([array2 count]<2){
-        event.allDay = YES;
-    }else {
-        NSString *st=[self trimString:[array2 objectAtIndex:0]];
-        NSString *et=[self trimString:[array2 objectAtIndex:1]];
-        array1 =[[NSArray alloc] initWithArray: [[self stringByStrippingHTML:[array objectAtIndex:0]] componentsSeparatedByString:@"号"]];
-        if([array1 count]<2)return;
-        temp=[array1 objectAtIndex:0];
-        if([temp intValue]<day-7)month--;
-        st=[[NSString alloc] initWithFormat:@"%d%@%d%@%@%@%@",year,@"-",month,@"-",temp,@" ",st];
-        et=[[NSString alloc] initWithFormat:@"%d%@%d%@%@%@%@",year,@"-",month,@"-",temp,@" ",et];
-        
-        startDate=[self NSStringDateToNSDate:st];
-        endDate=[self NSStringDateToNSDate:et];
-        event.allDay = NO;
-        alarm = [EKAlarm alarmWithRelativeOffset:-1800];// 30 minutes
-        
-        
-    }
     [event addAlarm:alarm];
-    
+    [event setLocation:[[NSString alloc]initWithFormat:@"%@",[temp objectForKey:@"locale"]]];
     
     
     // Set properties of the new event object  
-    event.title     = [self stringByStrippingHTML:[array objectAtIndex:1]];
+    
 
     event.startDate = startDate;  
     event.endDate   = endDate;  

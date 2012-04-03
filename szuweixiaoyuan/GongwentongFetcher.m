@@ -59,8 +59,13 @@
 {
     NSString *tempURL=[[NSString alloc] initWithFormat:@"%@%@",@"http://vlinju.sinaapp.com/html5/mailbox_content?mid=",nid];
     NSString *request = [NSString stringWithContentsOfURL:[NSURL URLWithString:tempURL] encoding:NSUTF8StringEncoding error:nil];
+    
     request=[request stringByReplacingOccurrencesOfString:@"<div class=\"top\">" withString:@"<div class=\"top\"><!--"];
     request=[request stringByReplacingOccurrencesOfString:@"weixiaoyuan.png\"/></a>" withString:@"-->"];
+    request=[request stringByReplacingOccurrencesOfString:@"</td>" withString:@"</td></tr><tr>"];
+    request=[request stringByReplacingOccurrencesOfString:@"<body>" withString:@"<body><STYLE TYPE=\"text/css\" MEDIA=screen>.td_bg{background-color: #E3ECF5;width: 100px;font-weight: 900;margin-right: 15px;text-align: center;font-size: 14px;color: #666;}</STYLE>"];
+    
+
     return request;
 }
 + (NSArray *)getGWTList:(int)page
@@ -84,19 +89,26 @@
     request=[request stringByReplacingOccurrencesOfString:@"weixiaoyuan.png\"/></a>" withString:@"-->"];
     return request;
 }
-+ (NSString *)getSZUCAL:(NSString *)q
++ (NSArray *)getSZUCAL:(NSString *)q
 {
-    q = [q stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *tempURL=[[NSString alloc] initWithFormat:@"%@%@",@"http://szucal.com/wap/schedule.php?xing_ming=",q];
-    NSString *request = [NSString stringWithContentsOfURL:[NSURL URLWithString:tempURL] encoding:NSUTF8StringEncoding error:nil];
+    //http://www.szucal.com/api/1204/schedule.php
+    //q = [q stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *tempURL=[[NSString alloc] initWithFormat:@"%@%@",@"http://www.szucal.com/api/1204/schedule.php?stu_name=",q];
     
-    
-    
-    request=[request stringByReplacingOccurrencesOfString:@"<font color=\"red\">" withString:@"<p>"];
-    request=[request stringByReplacingOccurrencesOfString:@"</font>" withString:@"</p>"];
-    request=[request stringByReplacingOccurrencesOfString:@"</p><p>" withString:@"</p><hr/><p>"];
-    request=[request stringByReplacingOccurrencesOfString:@"</p><br><p>" withString:@"</p><hr/><p>"];
-    return request;
+    NSDictionary *temp=[self executeFetch:tempURL];
+    NSString *code=[temp objectForKey:@"code"];
+    if ([code intValue]==0) {
+        temp=[temp objectForKey:@"schedule"];
+        NSMutableArray *ret=[[NSMutableArray alloc] init];
+        int i=0;
+        for (NSDictionary *t in temp) {
+            [ret insertObject:t atIndex:i];
+            i++;
+        }
+        
+        return ret;
+    }
+    return nil;
 }
 + (NSArray *)getLOVJOB
 {

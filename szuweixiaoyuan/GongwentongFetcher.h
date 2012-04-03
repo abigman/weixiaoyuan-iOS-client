@@ -11,7 +11,7 @@
 @interface GongwentongFetcher : NSObject
 + (NSArray *)getGWTList:(int)page;
 + (NSString *)getGWTContent:(NSString *)nid;
-+ (NSString *)getSZUCAL:(NSString *)q;
++ (NSArray *)getSZUCAL:(NSString *)q;
 + (NSArray *)getLOVJOB;
 + (NSString *)getLOVContent:(NSString *)jid;
 + (NSString *)getlibsrch:(NSString *)q;

@@ -60,7 +60,7 @@
     if (!self.szuCALTableViewController) {
         self.szuCALTableViewController = [[SZUCALTableViewController alloc] initWithNibName:@"MasterViewController" bundle:nil];
     }
-    [self.szuCALTableViewController setQ:[[NSString alloc] initWithFormat:@"%@%@%@",self.xingming.text,@"&xue_hao=",self.xuehao.text]];
+    [self.szuCALTableViewController setQ:[[NSString alloc] initWithFormat:@"%@%@%@",self.xingming.text,@"&stu_id=",self.xuehao.text]];
     [self.navigationController pushViewController:self.szuCALTableViewController animated:YES];
 }
 @end
